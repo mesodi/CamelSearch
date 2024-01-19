@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/contact"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "contacts": [
+        {
+          "firstname": "John",
+          "lastname": "Doe",
+          "email": "john.doe@example.com",
+          "title": "Research Scientist",
+          "companyName": "Innovatech",
+          "companyAddress": "123 Tech Park, Silicon Valley, CA, USA",
+          "country": "USA"
+        },
+        {
+          "firstname": "Jane",
+          "lastname": "Smith",
+          "email": "jane.smith@example.com",
+          "title": "Lead Engineer",
+          "companyName": "TechAdvance",
+          "companyAddress": "456 Innovation Drive, Boston, MA, USA",
+          "country": "USA"
+        },
+        {
+          "firstname": "Mike",
+          "lastname": "Johnson",
+          "email": "mike.johnson@example.com",
+          "title": "Product Designer",
+          "companyName": "Creative Solutions",
+          "companyAddress": "789 Design Street, New York, NY, USA",
+          "country": "USA"
+        },
+        {
+          "firstname": "Lisa",
+          "lastname": "Brown",
+          "email": "lisa.brown@example.com",
+          "title": "Software Architect",
+          "companyName": "CodeCraft",
+          "companyAddress": "101 Developer Ave, Seattle, WA, USA",
+          "country": "USA"
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

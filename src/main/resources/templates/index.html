@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Camel Route Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Light Sky Blue */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #336699;
+        }
+
+        /* Style the buttons */
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #336699;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #265985;
+        }
+
+        /* Style the container div */
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        /* Style the JSON fields */
+        pre {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #e0ffff; /* Light Cyan */
+            white-space: pre-wrap; /* Preserve newlines and wrapping */
+            overflow: auto;
+        }
+
+        /* Style the logout link */
+        p {
+            text-align: right;
+        }
+
+        p a {
+            color: #336699;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style the search button */
+        .search-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .search-button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #336699;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .search-button:hover {
+            background-color: #265985;
+        }
+    </style>
+    <script th:inline="javascript">
+        // Function to make an AJAX request to the backend
+        function initiateRoute(route) {
+            $.ajax({
+                type: 'GET',
+                url: '/' + route,
+                success: function (data) {
+                    const formattedJson = JSON.stringify(data, null, 2)
+                        .replace(/\\n/g, '\n')
+                        .replace(/\\"/g, '"')
+                        .replace(/,/g, ',\n');
+                    $('#' + route + 'Field').text(formattedJson);
+                },
+                error: function (error) {
+                    console.error('Error initiating route ' + route + ': ' + JSON.stringify(error));
+                }
+            });
+        }
+
+        // Function to search for a user by name
+        function searchUser() {
+            var name = $('#searchInput').val();
+            if (!name.trim()) {
+                $('#errorMessage').text("Please enter a name to search.").show();
+                return;
+            } else {
+                $('#errorMessage').hide();
+            }
+            $.ajax({
+                type: 'GET',
+                url: '/search',
+                data: {firstname: name},
+                success: function (data) {
+                    $('#searchField').text(JSON.stringify(data, null, 2).replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/,/g, ',\n'));
+                    $('#errorMessage').hide(); // Hide error message in case of successful search
+                },
+                error: function (error) {
+                    console.error('Error searching for user: ' + JSON.stringify(error));
+                    $('#errorMessage').text("Error occurred while searching.").show();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>Welcome to the Home Page</h1>
+<br/>
+<h2>Camel Route Demo</h2>
+
+<!-- Buttons to initiate Camel routes -->
+<div class="container">
+    <button onclick="initiateRoute('patent')">Initiate Patent Route</button>
+    <button onclick="initiateRoute('contact')">Initiate Contact Route</button>
+</div>
+
+<!-- Fields to display JSON information -->
+<div class="container">
+    <pre id="patentField"></pre>
+    <pre id="contactField"></pre>
+</div>
+
+<!-- Search section -->
+<div class="search-container">
+    <h2>Search by Inventor or Contact Name</h2>
+    <label for="searchInput"></label>
+    <input type="text" id="searchInput" placeholder="Enter a name...">
+    <button class="search-button" onclick="searchUser()">Search</button>
+    <span id="errorMessage" style="color: red; display: none;"></span> <!-- Error message placeholder -->
+</div>
+
+<!-- Field to display search results -->
+<div class="container">
+    <pre id="searchField"></pre>
+</div>
+</body>
+</html>

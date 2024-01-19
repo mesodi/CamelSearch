@@ -1,0 +1,56 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/patent"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "patents": [
+        {
+          "publicationYear": 2022,
+          "applicationNumber": "US2022-0001",
+          "title": "Advanced Robotics",
+          "application": "Robotics",
+          "inventors": ["John Doe"],
+          "cpc": "G05B 19/418"
+        },
+        {
+          "publicationYear": 2021,
+          "applicationNumber": "US2021-0023",
+          "title": "Quantum Computing Method",
+          "application": "Quantum Computing",
+          "inventors": ["Jane Smith"],
+          "cpc": "G06N 10/00"
+        },
+        {
+          "publicationYear": 2023,
+          "applicationNumber": "US2023-0101",
+          "title": "Innovative Cartoon Animation Techniques",
+          "application": "Animation Technology",
+          "inventors": ["Tom and Jerry"],
+          "cpc": "G06T 15/70"
+        },
+        {
+          "publicationYear": 2020,
+          "applicationNumber": "US2020-0015",
+          "title": "Eco-friendly Material Synthesis",
+          "application": "Materials Science",
+          "inventors": ["Mike Johnson"],
+          "cpc": "B32B 27/00"
+        },
+        {
+          "publicationYear": 2019,
+          "applicationNumber": "US2019-0078",
+          "title": "AI-Driven Data Analytics",
+          "application": "Artificial Intelligence",
+          "inventors": ["Lisa Brown"],
+          "cpc": "G06F 17/30"
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
